@@ -8,11 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="day05web" />
         <module name="dm" />
-        <module name="day01web" />
         <module name="day02web" />
         <module name="day04web" />
         <module name="jsondemo" />
         <module name="listener" />
+        <module name="day01web" />
         <module name="day01quick" />
         <module name="day03" />
       </profile>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="day05web" />
+        <module name="dm" />
+        <module name="day01web" />
+        <module name="day02web" />
+        <module name="day04web" />
+        <module name="jsondemo" />
+        <module name="listener" />
+        <module name="day01quick" />
+        <module name="day03" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

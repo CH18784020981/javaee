@@ -1,0 +1,157 @@
+
+<!--登录页面-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .remove-one {
+            background-color: cadetblue;
+            color: white;
+            padding: 2px 10px;
+        }
+    </style>
+</head>
+<body>
+<form id="user-form" style="border:1px solid">
+    <label for="username">用户名</label><input id="username"/>
+    <button id="add-one">添加</button>
+</form>
+
+<table id="test-table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>名字</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="body-list">
+    <tr>
+        <td>1</td>
+        <td>张三</td>
+        <td>
+            <button class="remove-one">删除</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="jquery-3.4.1.js"></script>
+<script>
+    $(function () {
+
+
+        $("#add-one").click(function (e) {
+            var target = {};
+            target.username = $("#username").val();
+
+            $.ajax({
+                url: "adduser",
+                type: "post",
+                contentType: "application/json;charset:utf-8;",
+                data: JSON.stringify(target),
+                success: function (data) {
+                    console.log("success", typeof data);
+                    console.log("success", typeof JSON.parse(data));
+                    addOneRow(JSON.parse(data));
+                },
+                error: function (data) {
+                    console.log("error", data);
+                }
+            });
+            e.preventDefault();
+        });
+
+        // $("#body-list").on("click", ".remove-one", function () {
+        //     $(this).closest("tr").remove();
+        // });
+        // var id = 1;
+        // $("#add-one").click(function (e) {
+        //     var username = $("#username").val();
+        //     var tr = $("<tr>");
+        //     var tds = tr.append("<td>").append("<td>").append("<td>").find("td");
+        //     tds.eq(0).text(id++);
+        //     tds.eq(1).text(username);
+        //     tds.eq(2).append($("<button>").addClass("remove-one").text("删除"));
+        //     $("#body-list").append(tr);
+        //     e.preventDefault();
+        // });
+
+        function addOneRow(user) {
+            var tr = $("<tr>");
+            var tds = tr.append("<td>").append("<td>").append("<td>").find("td");
+            tds.eq(0).text(user.id);
+            tds.eq(1).text(user.username);
+            tds.eq(2).append($("<button>").addClass("remove-one").text("删除"));
+            $("#body-list").append(tr);
+        }
+    });
+
+
+    // $(function () {
+    //     var btn = $("<button>");
+    //     btn.css("backgroundColor", "red");
+    //     btn.css({
+    //         "backgroundColor": "red",
+    //         "color": "green"
+    //     });
+    //     btn.text("提交");
+    //     $("#user-form").append(btn);
+    //     btn.click(function (e) {
+    //         console.log(e);
+    //         console.log("user click here");
+    //         e.preventDefault();
+    //     });
+    // });
+
+
+    // console.log(document);
+    // console.log(typeof 1);
+    // console.log(typeof 1.1);
+    // console.log(typeof true);
+    // console.log(typeof "1233");
+    // console.log(typeof {"username": "张三"});
+    // console.log(typeof undefined);
+    // console.log(typeof null);
+    //
+    // var buttonElem = document.createElement("button");
+    // var buttonElemReset = document.createElement("button");
+    // console.log(buttonElem);
+    // buttonElem.textContent = "提交";
+    // buttonElem.id = "submit-btn";
+    // buttonElem.setAttribute("abc", "1234");
+    // // buttonElem.type="submit";
+    // // buttonElemReset.type="reset";
+    // buttonElemReset.textContent = "重置";
+    // buttonElem.style.backgroundColor = "red";
+    // document.getElementById("user-form").append(buttonElem);
+    // document.getElementById("user-form").append(buttonElemReset);
+    //
+    // buttonElem.addEventListener("click", function (ev) {
+    //     console.log("user clicked button capture");
+    //     // console.log(ev);
+    //     ev.preventDefault();
+    // }, true);
+    //
+    // buttonElem.addEventListener("click", function (ev) {
+    //     console.log("user clicked button");
+    //     // console.log(ev);
+    //     ev.preventDefault();
+    // });
+    //
+    //
+    //
+    // document.getElementById("user-form").addEventListener("click", function () {
+    //     console.log("form clicked");
+    // });
+    //
+    //
+    // document.getElementById("user-form").addEventListener("click", function () {
+    //     console.log("form clicked capture");
+    // }, true);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<school xmlns="http://club.banyuan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://club.banyuan student.xsd">
+    <student>
+        <name>杜文学</name>
+        <age>20</age>
+    </student>
+<student><name>李四</name><age>12</age></student></school>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #searchDiv {
+            margin-left: 300px;
+            margin-top: 200px;
+            width: 250px;
+        }
+
+        #content {
+            width: 150px;
+        }
+
+        #suggest {
+            display: none;
+            font-size: 12px;
+            width: 150px;
+            border: black 1px solid;
+        }
+    </style>
+</head>
+<body>
+<div id="searchDiv">
+    <form action="">
+        <input id="content" type="text">
+        <input id="search-btn" type="button" value="查询"><br>
+        <div id="suggest"></div>
+    </form>
+</div>
+</body>
+<script src="jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        var oldContent = "";//文本变化前的内容，使用它和新内容对比，发生了变化才发送ajax请求
+        $("#content").keyup(function (e) {
+            var content = $.trim($(this).val());
+            if (content === "" || content === oldContent) {
+                return;//没有输入内容或者文本内容没有发生变化时就返回
+            }
+            oldContent = content;
+            // var params = {"input": $.trim($("#content").val())};
+
+            $.ajax({
+                url: "search",
+                type: "post",
+                contentType: "application/json;charset:utf-8",
+                data: JSON.stringify({input: content}),
+                success: function (data) {
+                    //alert(JSON.stringify(data));
+                    var values = JSON.parse(data);
+                    if (values.length === 0) {
+                        //没有关键字就隐藏提示框，并返回
+                        $("#suggest").hide();
+                        return;
+                    }
+                    $("#suggest").show().html("");//显示提示框并清空提示框
+
+                    //添加关键字列表
+                    for (var i = 0; i < values.length; i++) {
+                        $("#suggest").append("<div class='keyword'>" + values[i] + "</div>");
+                    }
+                    //为新添加的关键字列表添加事件
+                    $(".keyword").on("mousemove", function (event) {
+                        //鼠标移入背景变成灰色
+                        $(event.target).css("background-color", "silver");
+                        $(event.target).css("cursor", "pointer");
+                    });
+                    $(".keyword").on("mouseout", function (event) {
+                        //鼠标移出背景变成白色
+                        $(event.target).css("background-color", "white");
+                        $(event.target).css("cursor", "pointer");
+                    });
+                    $(".keyword").on("dblclick", function (event) {
+                        //双击时把内容加入到输入框
+                        $("#content").val($(event.target).text());
+                        $("#suggest").hide();
+                        oldContent = "";
+                    });
+                },
+                error: function () {
+                    alert("Ajax请求出错");
+                }
+            });
+        });
+    });
+</script>
+</html>

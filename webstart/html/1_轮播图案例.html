@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="../image/image_1.jpg" id="img" height="50%" width="100%">
+
+<script>
+
+    var a = 1;
+
+    function f() {
+        a++;
+        if (a > 4) {
+            a = 1;
+        }
+        // 获取img对象
+        var imgs = document.getElementById("img");
+
+        imgs.src = "../image/image_" + a+".jpg";
+
+
+    }
+    // 设置定时器（这个定时器是循环的），后面是毫秒
+    setInterval(f, 2000);
+    /*这个定时器只执行一次
+    setTimeout()*/
+
+</script>
+
+</body>
+</html>

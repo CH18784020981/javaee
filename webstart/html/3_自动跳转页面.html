@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+
+    p {
+        text-align: center;
+
+    }
+
+    #time {
+        color: red;
+    }
+</style>
+
+
+<p>
+    本页面将在<SPAN id="time">5</SPAN>秒后跳转
+
+</p>
+
+<script>
+    var time = document.getElementById("time");
+    var a = 5;
+
+    function f() {
+        a--;
+        if (a <= 0) {
+            location.href = " https://www.banyuan.club";
+        }
+        time.innerHTML = a + "";
+    }
+
+    setInterval(f, 1000);
+
+</script>
+</body>
+</html>

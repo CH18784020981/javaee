@@ -27,7 +27,7 @@ public class AddBillServlet extends HttpServlet {
         //2.获取参数
         Map<String, String[]> map = request.getParameterMap();
         //3.封装对象
-        Bills bill = new Bills ();
+        Bills bill = new Bills();
         try {
             BeanUtils.populate(bill, map);
 
